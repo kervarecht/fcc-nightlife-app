@@ -3,10 +3,12 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import LiveReloadPlugin from 'webpack-livereload-plugin';
 
 export default {
-    entry: './client/index.js',
+    entry: {
+        app: './client/index.js',
+        login: './client/login.js'},
     output: {
         path: '/',
-        filename: 'bundle.js'
+        filename: '[name].bundle.js'
     },
     module: {
         rules: [{
@@ -35,7 +37,16 @@ export default {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: 'client/index.html'
+            myPageHeader: "The Index Page",
+            filename: "index.html",
+            template: 'client/index.html',
+            chunks: ['app']
+        }),
+        new HtmlWebpackPlugin({
+            myPageHeader: "Log In",
+            filename: "login.html",
+            template: 'client/login.html',
+            chunks: ['login']
         }),
         new LiveReloadPlugin()
      ]

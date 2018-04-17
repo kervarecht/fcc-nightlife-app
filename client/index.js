@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './style/style.css';
-import HelloWorld from "./components/HelloWorld";
+import './style/style.scss';
+import NavBar from "./components/NavBar.js"
 
 const App = () => {
     return (
         <div class="App">
-            <HelloWorld />
+            <NavBar />
             </div>
     )
 }
