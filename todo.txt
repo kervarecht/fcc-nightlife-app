@@ -1,0 +1,1 @@
+Link up search component with function from parent (IndexApp)
