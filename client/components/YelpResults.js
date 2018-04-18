@@ -30,7 +30,6 @@ class YelpResults extends Component {
     }
 
     renderAll(){
-        console.log("renderAll called.")
         return this.state.restaurants.map(restaurant => {
             return (
             <YelpSingleResult

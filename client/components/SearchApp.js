@@ -3,16 +3,21 @@ import React, {Component} from 'react';
 class SearchApp extends Component {
     constructor(props){
         super(props);
-        this.state={value: ""}
+        this.state= {
+            value: ""
+        }
         this.handleChange = this.handleChange.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
     }
     
     handleChange(){
         this.setState({"value": event.target.value});
-        console.log(this.state.value);
     }
+
     handleSearch(){
-        this.handleSearch = this.props.handleSearch;
+        const search = this.state.value;
+        this.props.handleSearch(search);
+        this.setState({"value": ""});
     }
 
     render(){
