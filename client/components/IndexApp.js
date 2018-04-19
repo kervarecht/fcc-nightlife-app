@@ -16,7 +16,16 @@ class IndexApp extends Component {
         this.setState({"search": value}, () => {
             console.log(this.state.search);
         });
-        //console.log(this.state.search)
+        fetch('http://localhost:3000/api/yelpreq', {
+            type: 'GET',
+            mode: "no-cors",
+            data: JSON.stringify(value),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => console.log(response));
+        //add a fetch option here to make an API call
     }
 
     render(){
