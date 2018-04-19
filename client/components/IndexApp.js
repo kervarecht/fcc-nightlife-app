@@ -16,15 +16,15 @@ class IndexApp extends Component {
         this.setState({"search": value}, () => {
             console.log(this.state.search);
         });
-        fetch('http://localhost:3000/api/yelpreq', {
-            type: 'GET',
-            mode: "no-cors",
-            data: JSON.stringify(value),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => console.log(response));
+        axios.get('http://localhost:3000/api/yelpreq', 
+    {params: {
+        search: value
+    }})
+    .then(response => {
+        console.log(response.data);
+    })
+    .catch(error => console.log(error))
+    
         //add a fetch option here to make an API call
     }
 
