@@ -8,9 +8,10 @@ class YelpSingleResult extends Component {
     render(){
         return (
             <div className="YelpSingleResult">
-                <img src={this.props.img} />
+                <img src={this.props.image_url} />
                 <h4 className="restaurant-name">{this.props.name}</h4>
-                <h5 className="restaurant-address">{this.props.address}</h5>
+                <h5 className="restaurant-address">{this.props.location.address1}</h5>
+                <h5 className="zip-code">{this.props.zip_code}</h5>
                 <h5 className="restaurant-is-going">{this.props.going}</h5>
             </div>
         )
