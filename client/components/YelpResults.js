@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import YelpSingleResult from "./YelpSingleResult";
 
+
+
 class YelpResults extends Component {
     constructor(props){
         super(props);
@@ -8,11 +10,6 @@ class YelpResults extends Component {
             restaurants: this.props.restaurants
         }
         this.renderAll = this.renderAll.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-    }
-
-    handleChange(){
-
     }
 
     renderAll(){
@@ -20,12 +17,14 @@ class YelpResults extends Component {
             return (
             <YelpSingleResult
                 name={restaurant.name}
-                img={restaurant.img}
-                address={restaurant.address}
-                going={restaurant.going}
+                image_url={restaurant.image_url}
             />
             )
         });
+    }
+
+    componentWillReceiveProps(newProps){
+        this.setState(newProps);
     }
 
     render(){
