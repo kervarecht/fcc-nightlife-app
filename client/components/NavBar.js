@@ -9,8 +9,9 @@ class NavBar extends Component {
     render(){
         return(
         <div className="NavBar">
+            <h1 className="app-title"><a href="/">Findr </a></h1>
             <ul>
-                <li><a href="/">Home </a></li>
+                
                 <li><a href="/login.html">Login</a></li>
                 </ul>
             </div>

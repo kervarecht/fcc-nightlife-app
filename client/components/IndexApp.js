@@ -23,7 +23,7 @@ class IndexApp extends Component {
         super(props);
         this.state = {
             search: "",
-            restaurants: [exampleFetchOne, exampleFetchTwo]
+            restaurants: []
         }
         this.handleSearch = this.handleSearch.bind(this);
         

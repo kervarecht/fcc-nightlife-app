@@ -1,6 +1,116 @@
-h1 {
-    font-family: sans-serif;
-    &:hover {
-        color: orange;
+@import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono');
+$main-blue: #1565c0;
+$dark-blue: #003c8f;
+$light-blue: #5e92f3;
+$main-grey: #455a64;
+$dark-grey:#1c313a;
+$light-grey: #718792;
+$text-color: #ffffff;
+div {
+    font-family: 'Roboto Mono';
+    color: $text-color;
+}
+
+.App {}
+
+.app-title {
+    text-align: left;
+}
+
+.NavBar {
+    padding: 10px;
+    text-align: left;
+    position: relative;
+    background: $main-blue;
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        li {
+            margin-bottom: 1em;
+        }
     }
+    color: $text-color;
+    & a {
+        color: $text-color;
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.SearchApp {
+    background: $dark-grey;
+    text-align: center;
+    min-height: 40px;
+}
+
+.search-input {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    outline: 0;
+    height: 24px;
+    width: 30%;
+    background-color: white;
+    color: black;
+    border: 0;
+    -webkit-border-radius: 4px 0 0 4px;
+    border-radius: 4px 0 0 4px;
+}
+
+.search-bar {}
+
+.Search {
+    outline: 0;
+    background: none;
+    background-color: $light-grey;
+    width: 15%;
+    height: 2em;
+    text-align: center;
+    border: 0;
+    text-rendering: auto;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    -webkit-transition: background-color .4s ease;
+    transition: background-color .4s ease;
+    -webkit-border-radius: 0 4px 4px 0;
+    border-radius: 0 4px 4px 0;
+    &:hover {
+        background: $light-blue;
+    }
+}
+
+.IndexApp {}
+
+.YelpResults {
+    padding: 1em 1em 1em 1em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.YelpSingleResult {
+    padding-top: 1em;
+    position: relative;
+    margin-top: 1em;
+    margin-left: 2em;
+    margin-right: 2em;
+    max-width: 250px;
+    min-width: 25%;
+    border-radius: 10%;
+    background: $dark-blue;
+    img {
+        max-width: 80%;
+        max-height: 300px;
+    }
+    .img-container {
+        margin: auto;
+        text-align: center;
+    }
+    .restaurant-name {
+        text-align: center;
+    }
+    .restaurant-address {}
+    .zip-code {}
+    .restaurant-is-going {}
 }

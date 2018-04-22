@@ -18,6 +18,9 @@ class YelpResults extends Component {
             <YelpSingleResult
                 name={restaurant.name}
                 image_url={restaurant.image_url}
+                address={restaurant.location.address1}
+                zip_code={restaurant.zip_code}
+                going="No"
             />
             )
         });
