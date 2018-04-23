@@ -19,7 +19,8 @@ class YelpResults extends Component {
                 name={restaurant.name}
                 image_url={restaurant.image_url}
                 address={restaurant.location.address1}
-                zip_code={restaurant.zip_code}
+                zip_code={restaurant.location.zip_code}
+                rating={restaurant.rating}
                 going="No"
             />
             )
@@ -27,6 +28,7 @@ class YelpResults extends Component {
     }
 
     componentWillReceiveProps(newProps){
+        console.log(newProps);
         this.setState(newProps);
     }
 

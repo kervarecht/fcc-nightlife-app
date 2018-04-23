@@ -6,6 +6,11 @@ $main-grey: #455a64;
 $dark-grey:#1c313a;
 $light-grey: #718792;
 $text-color: #ffffff;
+$off-white: #fdfdfd;
+body {
+    background: $off-white;
+}
+
 div {
     font-family: 'Roboto Mono';
     color: $text-color;
@@ -84,23 +89,28 @@ div {
 
 .YelpResults {
     padding: 1em 1em 1em 1em;
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     justify-content: space-between;
+    border-left: 1px $dark-grey solid;
+    border-right: 1px $dark-grey solid;
+    background: $off-white;
 }
 
 .YelpSingleResult {
-    padding-top: 1em;
-    position: relative;
-    margin-top: 1em;
-    margin-left: 2em;
-    margin-right: 2em;
-    max-width: 250px;
-    min-width: 25%;
-    border-radius: 10%;
-    background: $dark-blue;
+    margin-bottom: 1em;
+    border-radius: 1%;
+    width: 95%;
+    background: $dark-grey;
+    box-shadow: 3px 3px 5px 5px $main-blue;
+    text-align: center;
+    &:hover {
+        box-shadow: 5px 5px 7px 7px $main-grey;
+    }
     img {
-        max-width: 80%;
+        border-top-right-radius: 1%;
+        border-top-left-radius: 1%;
+        width: 100%;
         max-height: 300px;
     }
     .img-container {

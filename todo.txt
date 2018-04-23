@@ -1,1 +1,3 @@
-Link up search component with function from parent (IndexApp)
+Find an engaging design to present results (consider rows instead of a grid);
+Research, decide on and implement a social login solution
+Store user info, last location searched, and restaurants attending in back-end.
