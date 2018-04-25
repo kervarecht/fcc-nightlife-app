@@ -21,7 +21,7 @@ class SocialLogin extends Component {
             <div>
             <LoginButton
                 provider='google'
-                appId='YOUR_APP_ID'
+                appId='730225734394-ho5lo2r8be9pftth8uf04r6av962tmqk.apps.googleusercontent.com'
                 onLoginSuccess={this.handleSocialLogin}
                 onLoginFailure={this.handleSocialLoginFailure}
             >

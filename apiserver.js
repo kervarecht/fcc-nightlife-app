@@ -33,6 +33,10 @@ app.get('/api/yelpreq', (req, res) => {
     
 });
 
+app.get('/login', (req, res) => {
+    console.log(req);
+});
+
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
