@@ -4,6 +4,7 @@ import bodyparser from 'body-parser';
 import https from 'https';
 import axios from 'axios';
 import dotenv from 'dotenv';
+import {OAuth2Client} from 'google-auth-library';
 dotenv.config();
 
 const app = express();
@@ -33,8 +34,9 @@ app.get('/api/yelpreq', (req, res) => {
     
 });
 
-app.get('/login', (req, res) => {
-    console.log(req);
+app.post('/login', (req, res) => {
+    console.log(req.query);
+    console.log(req.body);
 });
 
 const port = process.env.PORT || 3000;

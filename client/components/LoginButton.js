@@ -6,8 +6,6 @@ const Button = ({ children, triggerLogin, provider, appId, onLoginSuccess, onLog
   onClick={triggerLogin} 
   provider={provider} 
   appId={appId}
-  // onLoginSuccess={handleSocialLogin}
-  // onLoginFailure={handleSocialLoginFailure}
   >
     { children }
   </button>
