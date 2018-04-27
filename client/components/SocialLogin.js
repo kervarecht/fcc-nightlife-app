@@ -10,12 +10,13 @@ class SocialLogin extends Component {
 
     handleSocialLogin(user) {
         const email = user.profile.email;
+        const name = user.profile.name;
         const idToken = user.token.idToken;
-        console.log("Login Handled!");
 
         axios.post('http://localhost:3000/login', {params: {
             idToken: idToken,
-            email: email
+            email: email,
+            name: name
         }})
             .then((response) => {
            console.log(response);
