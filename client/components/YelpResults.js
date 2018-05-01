@@ -11,7 +11,7 @@ class YelpResults extends Component {
         }
         this.renderAll = this.renderAll.bind(this);
     }
-
+    
     renderAll(){
         return this.state.restaurants.map(restaurant => {
             return (

@@ -7,6 +7,7 @@ const app = express();
 app.use(webpackMiddleware(webpack(webpackConfig)))
 
 app.get('/', (req, res) => {
+    console.log("Accessing homepage on port 5000")
     res.send('Hello world.');
 });
 

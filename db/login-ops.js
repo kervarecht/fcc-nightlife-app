@@ -6,16 +6,23 @@ const mongo = mongodb.MongoClient;
 
 module.exports = {
 login : function(user, url){
+    let email;
+    if (!user.email){
+        email = "Not provided"
+    }
+    else {
+        email = user.email;
+    }
     const thisUser = {
         name : user.name,
-        email: user.email,
+        email: email,
         going: []
     }
 
     const deferred = Q.defer();
     mongo.connect(url, (err, client) => {
         const query = {
-            email: user.email
+            email: thisUser.email
         }
             if (err) throw err;
             console.log("Connected to Database!");
@@ -40,6 +47,31 @@ login : function(user, url){
             })
             
     })
+    return deferred.promise;
+},
+find: function(email, url){
+    const deferred = Q.defer();
+    mongo.connect(url, (err, client) => {
+        if (err) throw err;
+        const query = {
+            email: email
+        }
+        const db = client.db('fcc-nightlife-db');
+        const collection = db.collection('users');
+
+        collection.findOne(query, (err, result) =>{
+            if (err) throw err;
+            if (result === null){
+                console.log("No user logged in");
+                deferred.resolve(false);
+                client.close()
+            }
+            else {
+            deferred.resolve(result);
+            client.close();
+            }
+        });
+    });
     return deferred.promise;
 }
 }

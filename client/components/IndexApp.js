@@ -29,7 +29,16 @@ class IndexApp extends Component {
         
     }
 
-    
+    componentDidMount(){
+
+        axios.get('http://localhost:3000/user', {
+            withCredentials: true
+        })
+        .then(response => {
+            console.log(response.data);
+        })
+    }
+
     handleSearch(value){ //passed into SearchApp to grab the searched location
         const self = this; //avoid window object 'this' in GET and refer to constructor with self
         axios.get('http://localhost:3000/api/yelpreq', 
