@@ -2,42 +2,17 @@ import React, {Component} from 'react';
 import YelpResults from './YelpResults';
 import SearchApp from './SearchApp';
 
-const exampleFetchOne = {
-    name: "Great Restaurant",
-    address: "115 Charming Street",
-    image_url: "https://i.imgur.com/pHIgVhh.jpg",
-    zip_code: "06067",
-    going: 'No'
-}
-
-const exampleFetchTwo = {
-    name: "Bob's Restaurant",
-    address: "1145 DeBwan Street",
-    zip_code: '15486',
-    image_url: "https://i.imgur.com/EyY6ivm.jpg",
-    going: 'No'
-}
-
 class IndexApp extends Component {
     constructor(props){
         super(props);
         this.state = {
             search: "",
-            restaurants: []
+            restaurants: [],
+
         }
-        this.handleSearch = this.handleSearch.bind(this);
-        
+        this.handleSearch = this.handleSearch.bind(this);   
     }
 
-    componentDidMount(){
-
-        axios.get('http://localhost:3000/user', {
-            withCredentials: true
-        })
-        .then(response => {
-            console.log(response.data);
-        })
-    }
 
     handleSearch(value){ //passed into SearchApp to grab the searched location
         const self = this; //avoid window object 'this' in GET and refer to constructor with self
@@ -56,7 +31,7 @@ class IndexApp extends Component {
         return(
             <div className="IndexApp">
                 <SearchApp handleSearch={this.handleSearch} />
-                <YelpResults restaurants={this.state.restaurants} />
+                <YelpResults restaurants={this.state.restaurants} addGoing={this.addGoing}/>
                 </div>
         )
     }

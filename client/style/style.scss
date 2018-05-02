@@ -90,7 +90,7 @@ div {
 .YelpResults {
     padding: 1em 1em 1em 1em;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fill, 186px);
     justify-content: space-between;
     border-left: 1px $dark-grey solid;
     border-right: 1px $dark-grey solid;
@@ -98,11 +98,13 @@ div {
 }
 
 .YelpSingleResult {
+    color: black;
     margin-bottom: 1em;
     border-radius: 1%;
+    border: 1px solid $dark-grey;
     width: 95%;
-    background: $dark-grey;
-    box-shadow: 3px 3px 5px 5px $main-blue;
+    background: $off-white;
+    box-shadow: 3px 3px 5px 5px $light-grey;
     text-align: center;
     &:hover {
         box-shadow: 5px 5px 7px 7px $main-grey;
@@ -123,4 +125,27 @@ div {
     .restaurant-address {}
     .zip-code {}
     .restaurant-is-going {}
+}
+
+.goingtrue {
+    background: $main-grey;
+    color: $dark-blue;
+    box-shadow: 3px 3px 5px 5px $main-blue;
+    text-align: center;
+    &:hover {
+        box-shadow: 5px 5px 7px 7px $main-grey;
+    }
+    img {
+        border-top-right-radius: 1%;
+        border-top-left-radius: 1%;
+        width: 100%;
+        max-height: 300px;
+    }
+    .img-container {
+        margin: auto;
+        text-align: center;
+    }
+    .restaurant-name {
+        text-align: center;
+    }
 }
