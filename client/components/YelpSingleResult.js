@@ -30,6 +30,7 @@ class YelpSingleResult extends Component {
                 <h5 className="zip-code">{this.props.zip_code}</h5>
                 <h5 className="restaurant-is-going">{this.props.going}</h5>
                 <h5 className="restaurant-rating">{this.props.rating}</h5>
+                <input type="hidden" value={this.props.id} ></input>
             </div>
         )
     }

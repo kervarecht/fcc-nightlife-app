@@ -73,5 +73,37 @@ find: function(email, url){
         });
     });
     return deferred.promise;
+},
+addRestaurant: function(user, restaurant, url){
+    const deferred = Q.defer();
+    mongo.connect(url, (err, client) => {
+        if (err) throw err;
+        const db = client.db('fcc-nightlife-db');
+        const collection = db.collection('users');
+        const query = {
+            email: user.emails[0].value
+        }
+        const update = {$addToSet: {
+            going : restaurant
+        }}
+
+        collection.updateOne(query, update, function(err, response) {
+            if (err) throw err;
+            if (!response){
+                client.close();
+                console.log("Add operation unsuccessful")
+                deferred.resolve(false);
+            }
+            else{
+                console.log("Add operation successful!");
+                client.close();
+                deferred.resolve(response);
+            }
+        })
+    });
+    return deferred.promise;
+},
+removeRestaurant : function(user, restaurant, url){
+
 }
 }

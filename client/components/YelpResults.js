@@ -20,7 +20,7 @@ class YelpResults extends Component {
                 withCredentials: true
             })
             .then(response => {
-                console.log(response.data);
+                this.setState({going: response.data.user.going});
             });
     }
 
@@ -28,6 +28,14 @@ class YelpResults extends Component {
         console.log(this.state.going);
         console.log("Parent function being called.");
         this.setState({going: [...this.state.going, id]});
+        axios.get('http://localhost:3000/addgoing', {
+            withCredentials: true,
+            params: {
+                going: id
+            }
+        }).then(response => {
+            console.log(response);
+        });
     }
     
     renderAll(){
@@ -64,7 +72,6 @@ class YelpResults extends Component {
     }
 
     componentWillReceiveProps(newProps){
-        console.log(newProps);
         this.setState(newProps);
     }
 

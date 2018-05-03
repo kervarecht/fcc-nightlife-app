@@ -129,10 +129,25 @@ app.get('/user', (req, res) => {
         else {
             res.send({'user': user});
         }
-    })
-    
-  
+    })  
 }});
+
+app.get('/addgoing', (req, res) => {
+
+    if (!req.user){
+        res.send("Not logged in yet");
+    }
+    else {
+    const id = req.query.going;
+
+    LogOps.addRestaurant(req.user, id, process.env.DATABASE)
+    .then(result => {
+        res.send({data: result.nModified});
+    }).catch(e => {
+        console.log(e);
+    })
+}
+});
 
 //authentication routes
 app.get('/auth/google',
