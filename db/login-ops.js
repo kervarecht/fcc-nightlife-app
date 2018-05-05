@@ -74,7 +74,7 @@ find: function(email, url){
     });
     return deferred.promise;
 },
-addRestaurant: function(user, restaurant, url){
+addGoing: function(user, restaurant, url){
     const deferred = Q.defer();
     mongo.connect(url, (err, client) => {
         if (err) throw err;
@@ -103,7 +103,36 @@ addRestaurant: function(user, restaurant, url){
     });
     return deferred.promise;
 },
-removeRestaurant : function(user, restaurant, url){
+removeGoing : function(user, id, url){
+    const deferred = Q.defer();
+    mongo.connect(url, (err, client) => {
+        const db = client.db('fcc-nightlife-db');
+        const collection = db.collection('users');
 
+        const query = {
+            email: user.email
+        }
+        const operation = {
+            $pull : {
+                going: id
+            }
+        }
+        collection.update(query, operation)
+        .then(result => {
+            if (result == null){
+                client.close();
+                console.log('Could not find ID');
+                return deferred.resolve(false);
+            }
+            else {
+                client.close();
+                console.log("removed " + id)
+                return deferred.resolve(result);
+            }
+        }).catch(e => {
+            console.log(e);
+        })
+    })
+    return deferred.promise;
 }
 }

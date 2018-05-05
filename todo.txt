@@ -1,4 +1,4 @@
 Find an engaging design to present results (consider rows instead of a grid);
-Store user info, last location searched, and restaurants attending in back-end.
-Implement post request to push selected restaurants to back-end for later retrieval
+Store user info, last location searched, and restaurants attending in back-end. (info and restaurants done)
+Implement post request to push selected restaurants to back-end for later retrieval - DONE
 Implement post request to remove selected restaurants from back-end when selected

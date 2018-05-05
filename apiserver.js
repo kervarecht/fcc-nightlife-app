@@ -115,14 +115,13 @@ app.get('/api/yelpreq', (req, res) => {
 });
 
 app.get('/user', (req, res) => {
-    console.log("User request received.")
+    // console.log("User request received.")
     if (!req.user){
         res.send("Not logged in yet.");
     }
     else {
     LogOps.find(req.user.emails[0].value, process.env.DATABASE)
     .then(user => {
-        console.log(user);
         if (user == false){
             res.send("User not found");
         }
@@ -140,13 +139,28 @@ app.get('/addgoing', (req, res) => {
     else {
     const id = req.query.going;
 
-    LogOps.addRestaurant(req.user, id, process.env.DATABASE)
+    LogOps.addGoing(req.user, id, process.env.DATABASE)
     .then(result => {
         res.send({data: result.nModified});
     }).catch(e => {
         console.log(e);
     })
 }
+});
+
+app.get('/removegoing', (req, res) => {
+    if (!req.user){
+        res.send("Not logged in yet");
+    }
+    else {
+        const id = req.query.going
+        LogOps.removeGoing(req.user, id, process.env.DATABASE)
+        .then(result => {
+            res.send({data: result.nModified})
+        }).catch(e => {
+            console.log(e);
+        })
+    }
 });
 
 //authentication routes

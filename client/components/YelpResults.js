@@ -8,10 +8,13 @@ class YelpResults extends Component {
         super(props);
         this.state = {
             restaurants: this.props.restaurants,
-            going: []
+            going: [],
+            loggedIn: false
         }
         this.renderAll = this.renderAll.bind(this);
         this.addGoing = this.addGoing.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+        this.removeGoing = this.removeGoing.bind(this);
     }
 
     componentDidMount(){
@@ -20,29 +23,58 @@ class YelpResults extends Component {
                 withCredentials: true
             })
             .then(response => {
-                this.setState({going: response.data.user.going});
+                if (!response.data.user.going || response.data.user.going == undefined){
+                    console.log("Not logged in.");
+                }
+                else {
+                this.setState({going: response.data.user.going,
+                loggedIn: true});
+                }
             });
     }
 
     addGoing(id){
-        console.log(this.state.going);
-        console.log("Parent function being called.");
-        this.setState({going: [...this.state.going, id]});
         axios.get('http://localhost:3000/addgoing', {
             withCredentials: true,
             params: {
                 going: id
             }
         }).then(response => {
-            console.log(response);
-        });
+            // console.log(response);
+        }).catch(error => console.log(error));
     }
-    
+    removeGoing(id){
+        axios.get('http://localhost:3000/removegoing', {
+            withCredentials: true,
+            params: {
+                going: id
+            }
+        }).then(response => {
+            // console.log(response);
+        }).catch(error => console.log(error));
+    }
+
+    handleClick(id){
+        if (this.state.loggedIn == false){
+            alert("Please log in to use this feature");
+        }
+        else {
+        if (!this.state.going.includes(id)){
+            this.addGoing(id);
+            this.setState({'going': [...this.state.going, id]})
+        }
+        else {
+            const newState = Array.from(this.state.going).filter(value => value != id);
+            this.removeGoing(id);
+            this.setState({'going': newState});
+        }}
+    }
     renderAll(){
         return this.state.restaurants.map(restaurant => {
             if (this.state.going.includes(restaurant.id)){
                 return (
                     <YelpSingleResult 
+                handleClick={this.handleClick}
                 addGoing={this.addGoing}
                 name={restaurant.name}
                 image_url={restaurant.image_url}
@@ -57,7 +89,8 @@ class YelpResults extends Component {
             else {
             return (
             <YelpSingleResult 
-                addGoing={this.addGoing}
+                handleClick={this.handleClick}
+                removeGoing={this.removeGoing}
                 name={restaurant.name}
                 image_url={restaurant.image_url}
                 address={restaurant.location.address1}
