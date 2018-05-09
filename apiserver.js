@@ -93,6 +93,7 @@ passport.serializeUser(function(user, done){
 
 
 //=====YELP API CALL STUFF====//
+let searched;
 const apiKey = 'Bearer ' + process.env.YELP_API_KEY
 const apiHeader = {
     headers : {
@@ -104,7 +105,7 @@ const yelpAPI = 'https://api.yelp.com/v3/businesses/search?location='
 //======ROUTES=====//
 app.get('/api/yelpreq', (req, res) => {
     const location = yelpAPI + req.query.search;
-   
+    searched = req.query.search;
     axios.get(location, apiHeader)
     .then(response => {
         res.send(response.data.businesses);
@@ -162,6 +163,15 @@ app.get('/removegoing', (req, res) => {
         })
     }
 });
+
+app.get('/searched', (req, res) => {
+    if (!searched){
+        res.send(false);
+    }
+    else {
+        res.send(searched);
+    }
+})
 
 //authentication routes
 app.get('/auth/google',
