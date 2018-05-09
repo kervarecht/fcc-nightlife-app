@@ -3,8 +3,25 @@ import React, {Component} from 'react';
 
 
 class NavBar extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            loggedIn: false
+        }
+    }
 
+    componentDidMount(){
+        axios.get('http://localhost:3000/user', {
+                withCredentials: true
+            })
+            .then(response => {
+                if (response.data.user){
+                    this.setState({loggedIn: true});
+                }
+            })
+    }
     render(){
+        if (!this.state.loggedIn){
         return(
         <div className="NavBar">
             <h1 className="app-title"><a href="/">Findr </a></h1>
@@ -15,7 +32,15 @@ class NavBar extends Component {
             <span class="google-button__text">Sign in with Google</span>
             </button></a>
             </div>
-        )
+        )}
+        else {
+            return (
+                <div className="NavBar">
+            <h1 className="app-title"><a href="/">Findr </a></h1>
+            <a href="http://localhost:3000/logout">Log Out</a>
+            </div>
+            )
+        }
     }
 }
 

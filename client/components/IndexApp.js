@@ -39,7 +39,7 @@ class IndexApp extends Component {
         return(
             <div className="IndexApp">
                 <SearchApp handleSearch={this.handleSearch} />
-                <YelpResults restaurants={this.state.restaurants} addGoing={this.addGoing}/>
+                <YelpResults restaurants={this.state.restaurants}/>
                 </div>
         )
     }

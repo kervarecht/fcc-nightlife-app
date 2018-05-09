@@ -110,9 +110,7 @@ app.get('/api/yelpreq', (req, res) => {
     .then(response => {
         res.send(response.data.businesses);
     })
-    .catch(error => console.log(error));
-
-    
+    .catch(error => console.log(error)); 
 });
 
 app.get('/user', (req, res) => {
@@ -184,6 +182,12 @@ app.get('/auth/google',
   })
 );
 
+app.get('/logout', (req, res) => {
+    var name = req.user.username;
+    console.log("Logging out " + name);
+    req.logout();
+    res.redirect('http://localhost:5000/');
+})
 //=====PORT AND RUN====//
 const port = process.env.PORT || 3000;
 
