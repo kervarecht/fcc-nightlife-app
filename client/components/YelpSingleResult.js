@@ -16,9 +16,8 @@ class YelpSingleResult extends Component {
                 <div className="img-container"><img src={this.props.image_url} /></div>
                 <h4 className="restaurant-name">{this.props.name}</h4>
                 <h5 className="restaurant-address">{this.props.address}</h5>
-                <h5 className="zip-code">{this.props.zip_code}</h5>
                 <h5 className="restaurant-is-going">{this.props.going}</h5>
-                <h5 className="restaurant-rating">{this.props.rating}</h5>
+                <h5 className={"restaurant-rating-" + this.props.rating}></h5>
                 <input type="hidden" value={this.props.id} ></input>
             </div>
         )

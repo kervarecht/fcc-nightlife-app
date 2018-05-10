@@ -1,15 +1,15 @@
-import express from 'express';
+const express = require('express');
 const app = express();
-import session from 'express-session';
-import cors from 'cors';
-import bodyparser from 'body-parser';
-import cookieparser from 'cookie-parser';
-import https from 'https';
-import axios from 'axios';
-import dotenv from 'dotenv';
+const session = require('express-session');
+const bodyparser = require('body-parser');
+const cookieparser = require('cookie-parser');
+const https = require('https');
+const axios = require('axios');
+const dotenv = require('dotenv');
 dotenv.config();
-import LogOps from './db/login-ops';
-import passport from 'passport';
+const path = require('path');
+const LogOps = require('./db/login-ops.js');
+const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 //===EXPRESS STUFF===//
@@ -20,13 +20,10 @@ app.use(session({
     cookie: { secure: false,
     maxAge: 60000 }
   }));
-app.enable('trust proxy');
-app.use(cors({credentials: true, origin: 'http://localhost:5000'}));
-app.use(bodyparser.urlencoded({
-    extended: true
-}));
 app.use(cookieparser());
 app.use(bodyparser.json());
+app.use(express.static(path.join(__dirname, 'dist')))
+app.use(express.static(path.join(__dirname, 'db')))
 
 //===PASSPORT STUFF===//
 app.use(passport.initialize());
@@ -52,7 +49,7 @@ app.use(function(req, res, next){
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_SECRET,
-    callbackURL: "http://localhost:3000/auth/google/callback",
+    callbackURL: "/auth/google/callback",
     passReqToCallback : true
   },
   function(req, accessToken, refreshToken, profile, done) {
@@ -78,7 +75,6 @@ passport.use(new GoogleStrategy({
   }
 ));
 
-//serialize and deserialize
 //serialize and de-serialize
 passport.serializeUser(function(user, done){
     console.log("Serializing user " + user.displayName);
@@ -103,14 +99,17 @@ const apiHeader = {
 const yelpAPI = 'https://api.yelp.com/v3/businesses/search?location='
 
 //======ROUTES=====//
+app.get('/', (req, res) => {
+    res.render('./dist/index.html');
+});
+
 app.get('/api/yelpreq', (req, res) => {
     const location = yelpAPI + req.query.search;
     searched = req.query.search;
-    axios.get(location, apiHeader)
-    .then(response => {
+    axios.get(location, apiHeader, function(err, response){
+        if (err) throw err;
         res.send(response.data.businesses);
-    })
-    .catch(error => console.log(error)); 
+    });
 });
 
 app.get('/user', (req, res) => {
@@ -119,15 +118,14 @@ app.get('/user', (req, res) => {
         res.send("Not logged in yet.");
     }
     else {
-    LogOps.find(req.user.emails[0].value, process.env.DATABASE)
-    .then(user => {
+    LogOps.find(req.user.emails[0].value, process.env.DATABASE, function(user){
         if (user == false){
             res.send("User not found");
         }
         else {
             res.send({'user': user});
         }
-    })  
+    });  
 }});
 
 app.get('/addgoing', (req, res) => {
@@ -138,11 +136,8 @@ app.get('/addgoing', (req, res) => {
     else {
     const id = req.query.going;
 
-    LogOps.addGoing(req.user, id, process.env.DATABASE)
-    .then(result => {
+    LogOps.addGoing(req.user, id, process.env.DATABASE, function(result){
         res.send({data: result.nModified});
-    }).catch(e => {
-        console.log(e);
     })
 }
 });
@@ -153,11 +148,8 @@ app.get('/removegoing', (req, res) => {
     }
     else {
         const id = req.query.going
-        LogOps.removeGoing(req.user, id, process.env.DATABASE)
-        .then(result => {
+        LogOps.removeGoing(req.user, id, process.env.DATABASE, function(result){
             res.send({data: result.nModified})
-        }).catch(e => {
-            console.log(e);
         })
     }
 });
@@ -177,7 +169,7 @@ app.get('/auth/google',
 
   app.get('/auth/google/callback', 
   passport.authenticate('google', {
-      successRedirect: 'http://localhost:5000/',
+      successRedirect: '/',
       failureRedirect: '/fail'
   })
 );
@@ -186,7 +178,7 @@ app.get('/logout', (req, res) => {
     var name = req.user.username;
     console.log("Logging out " + name);
     req.logout();
-    res.redirect('http://localhost:5000/');
+    res.redirect('/');
 })
 //=====PORT AND RUN====//
 const port = process.env.PORT || 3000;

@@ -19,7 +19,7 @@ class YelpResults extends Component {
 
     componentDidMount(){
 
-            axios.get('http://localhost:3000/user', {
+            axios.get('/user', {
                 withCredentials: true
             })
             .then(response => {
@@ -34,7 +34,7 @@ class YelpResults extends Component {
     }
 
     addGoing(id){
-        axios.get('http://localhost:3000/addgoing', {
+        axios.get('/addgoing', {
             withCredentials: true,
             params: {
                 going: id
@@ -44,7 +44,7 @@ class YelpResults extends Component {
         }).catch(error => console.log(error));
     }
     removeGoing(id){
-        axios.get('http://localhost:3000/removegoing', {
+        axios.get('/removegoing', {
             withCredentials: true,
             params: {
                 going: id

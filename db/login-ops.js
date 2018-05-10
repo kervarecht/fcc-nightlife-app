@@ -1,11 +1,11 @@
-import mongodb from 'mongodb';
-import dotenv from 'dotenv';
-import Q from 'q';
+const mongodb = require('mongodb');
+const dotenv = require('dotenv');
+const Q = require('q');
 dotenv.config();
 const mongo = mongodb.MongoClient;
 
 module.exports = {
-login : function(user, url){
+login : function(user, url, cb){
     let email;
     if (!user.email){
         email = "Not provided"
@@ -47,9 +47,9 @@ login : function(user, url){
             })
             
     })
-    return deferred.promise;
+    cb(deferred.promise);
 },
-find: function(email, url){
+find: function(email, url, cb){
     const deferred = Q.defer();
     mongo.connect(url, (err, client) => {
         if (err) throw err;
@@ -72,9 +72,9 @@ find: function(email, url){
             }
         });
     });
-    return deferred.promise;
+    cb(deferred.promise);
 },
-addGoing: function(user, restaurant, url){
+addGoing: function(user, restaurant, url, cb){
     const deferred = Q.defer();
     mongo.connect(url, (err, client) => {
         if (err) throw err;
@@ -101,9 +101,9 @@ addGoing: function(user, restaurant, url){
             }
         })
     });
-    return deferred.promise;
+    cb(deferred.promise);
 },
-removeGoing : function(user, id, url){
+removeGoing : function(user, id, url, cb){
     const deferred = Q.defer();
     mongo.connect(url, (err, client) => {
         const db = client.db('fcc-nightlife-db');
@@ -133,6 +133,6 @@ removeGoing : function(user, id, url){
             console.log(e);
         })
     })
-    return deferred.promise;
+    cb(deferred.promise)
 }
 }

@@ -12,8 +12,8 @@ $off-white-transparent: rgba(253,
 253,
 0.6);
 body {
-    background: $off-white;
-    padding: 0px;
+    background-image: url('https://i.imgur.com/b1bj2Zr.jpg');
+    background-size: cover;
 }
 
 div {
@@ -21,22 +21,26 @@ div {
     color: $text-color;
 }
 
-.App {
-    background: $off-white-transparent;
-}
-
 .app-title {
     text-align: left;
+}
+
+.app-intro {
+    text-align: left;
+    max-width: 50%;
+    float: right;
+    margin-right: 1em;
+    margin-top: -5em;
 }
 
 .NavBar {
     padding: 10px;
     text-align: left;
     position: relative;
-    background: $main-blue;
-    color: $text-color;
+    background: $off-white-transparent;
+    color: black;
     & a {
-        color: $text-color;
+        color: black;
         text-decoration: none;
         &:hover {
             text-decoration: underline;
@@ -47,10 +51,16 @@ div {
     }
 }
 
+.IndexApp {
+    padding-top: 1em;
+}
+
 .SearchApp {
     background: $dark-grey;
     text-align: center;
     min-height: 40px;
+    width: 50%;
+    margin: auto;
 }
 
 .search-input {
@@ -58,7 +68,9 @@ div {
     margin-bottom: 1em;
     outline: 0;
     height: 24px;
-    width: 30%;
+    width: 65%;
+    opacity: 0.9;
+    text-align: center;
     background-color: white;
     color: black;
     border: 0;
@@ -71,6 +83,7 @@ div {
     background: none;
     background-color: $light-grey;
     width: 15%;
+    min-width: 55px;
     height: 26px;
     text-align: center;
     border: 0;
@@ -90,9 +103,7 @@ div {
     display: grid;
     grid-template-columns: repeat(auto-fill, 186px);
     justify-content: space-between;
-    border-left: 1px $dark-grey solid;
-    border-right: 1px $dark-grey solid;
-    background: $off-white;
+    justify-items: center;
 }
 
 .YelpSingleResult {
@@ -105,9 +116,9 @@ div {
     background: $off-white;
     text-align: center;
     &:hover {
-        transition: width 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
         width: 100%;
-        box-shadow: 3px 3px 2px 0px $light-grey;
+        box-shadow: 3px 3px 2px 0px $dark-grey;
     }
     img {
         border-top-right-radius: 1%;

@@ -1,14 +1,10 @@
-import webpack from 'webpack';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import LiveReloadPlugin from 'webpack-livereload-plugin';
+const webpack = require('webpack');
+const merge = require('webpack-merge');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const common = require('./webpack.common.js');
 
-export default {
-    entry: {
-        app: './client/index.js'},
-    output: {
-        path: '/',
-        filename: '[name].bundle.js'
-    },
+module.exports = merge(common, {
+    devtool: 'source-map',
     module: {
         rules: [{
             use: 'babel-loader',
@@ -35,12 +31,11 @@ export default {
         } ]
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            myPageHeader: "The Index Page",
-            filename: "index.html",
-            template: 'client/index.html',
-            chunks: ['app']
-        }),
-        new LiveReloadPlugin()
-     ]
-};
+        new UglifyJSPlugin({
+            sourceMap: true
+            }),
+            new webpack.DefinePlugin({
+                'process.env.NODE_ENV': JSON.stringify('production')
+            })
+  ]
+});
