@@ -108,6 +108,7 @@ app.get('/', (req, res) => {
 app.get('/api/yelpreq', (req, res) => {
     console.log("Received Yelp API Call");
     const location = yelpAPI + req.query.search;
+    console.log(apiHeader, location);
     searched = req.query.search;
     axios.get(location, apiHeader, function(err, response){
         if (err) throw err;
