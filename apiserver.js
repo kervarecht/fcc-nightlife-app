@@ -64,7 +64,9 @@ passport.use(new GoogleStrategy({
           name: profile.displayName,
           email: profile.emails[0].value
       }
-      LogOps.login(thisUser, url)
+      LogOps.login(thisUser, url, function(result){
+          console.log("Logged in.");
+      })
       req.session.success = 'You are successfully logged in ' + profile.displayName + '!';
       return done(null, profile);
       }
