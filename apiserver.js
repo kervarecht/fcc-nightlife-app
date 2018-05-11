@@ -95,7 +95,7 @@ let searched;
 const apiKey = 'Bearer ' + process.env.YELP_API_KEY
 const apiHeader = {
     headers : {
-        Authorization: apiKey
+        'Authorization': apiKey
     }
 }
 const yelpAPI = 'https://api.yelp.com/v3/businesses/search?location='
