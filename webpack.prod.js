@@ -11,6 +11,9 @@ module.exports = merge(common, {
             test: /\.js$/,
             exclude: /node_modules/
         }, 
+        { 
+            test: /\.html$/i, 
+            use: 'html-loader' },
         {
             use: ['style-loader', 'css-loader'],
             test: /\.css/
