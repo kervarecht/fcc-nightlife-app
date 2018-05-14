@@ -124,7 +124,7 @@ app.get('/api/yelpreq', (req, res) => {
     request(apiHeader, function(err, response, body){
         console.log(err, response, body);
         if (err) throw err;
-        else if (!error && response.statusCode == 200) {
+        else if (!err && response.statusCode == 200) {
             var info = JSON.parse(body);
             console.log(info);
             res.send(info.businesses);
