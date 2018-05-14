@@ -122,6 +122,7 @@ app.get('/api/yelpreq', (req, res) => {
     searched = req.query.search;
    
     request(apiHeader, function(err, response, body){
+        console.log(err, response, body);
         if (err) throw err;
         else if (!error && response.statusCode == 200) {
             var info = JSON.parse(body);
