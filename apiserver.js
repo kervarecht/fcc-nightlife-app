@@ -94,10 +94,6 @@ passport.serializeUser(function(user, done){
 let searched;
 const apiKey = 'Bearer ' + process.env.YELP_API_KEY
 const yelpAPI = 'https://api.yelp.com/v3/businesses/search?location='
-
-const options = {
-    apiHeader
-  };
    
   function yelpCallback(error, response, body) {
     if (!error && response.statusCode == 200) {
