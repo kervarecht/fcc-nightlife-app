@@ -67,6 +67,7 @@ find: function(email, url, cb){
                 client.close()
             }
             else {
+                console.log("Connected to Database for find function!");
             deferred.resolve(result);
             client.close();
             }
