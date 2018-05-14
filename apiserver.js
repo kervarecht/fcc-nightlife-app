@@ -3,8 +3,8 @@ const app = express();
 const session = require('express-session');
 const bodyparser = require('body-parser');
 const cookieparser = require('cookie-parser');
-const https = require('https');
 const axios = require('axios');
+const request = require('request');
 const dotenv = require('dotenv');
 dotenv.config();
 const path = require('path');
@@ -93,12 +93,20 @@ passport.serializeUser(function(user, done){
 //=====YELP API CALL STUFF====//
 let searched;
 const apiKey = 'Bearer ' + process.env.YELP_API_KEY
-const apiHeader = {
-    headers : {
-        'Authorization': apiKey
-    }
-}
 const yelpAPI = 'https://api.yelp.com/v3/businesses/search?location='
+
+const options = {
+    apiHeader
+  };
+   
+  function yelpCallback(error, response, body) {
+    if (!error && response.statusCode == 200) {
+      var info = JSON.parse(body);
+      console.log(info);
+    }
+  }
+
+
 
 //======ROUTES=====//
 app.get('/', (req, res) => {
@@ -106,17 +114,29 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api/yelpreq', (req, res) => {
-    console.log("Received Yelp API Call");
     const location = yelpAPI + req.query.search;
-    console.log(apiHeader, location);
+    const apiHeader = {
+        url: location,
+        headers : {
+            'Authorization': apiKey
+        }
+    };
+    console.log("Received Yelp API Call: ", location, apiHeader);
+    
     searched = req.query.search;
-    axios.get(location, apiHeader, function(err, response){
+   
+    request(apiHeader, function(err, response, body){
         if (err) throw err;
-        console.log("Response: " + response);
-        console.log("Error: " + err);
-        res.send(response.data.businesses);
+        else if (!error && response.statusCode == 200) {
+            var info = JSON.parse(body);
+            console.log(info);
+            res.send(info.businesses);
+    }   
     });
-});
+    
+    })
+
+
 
 app.get('/user', (req, res) => {
     // console.log("User request received.")

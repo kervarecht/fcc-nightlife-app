@@ -41,6 +41,7 @@
         "react": "^16.3.2",
         "react-dom": "^16.3.2",
         "react-social-login": "^3.4.2",
+        "request": "^2.85.0",
         "sass-loader": "^7.0.1",
         "style-loader": "^0.20.3",
         "webpack": "^4.5.0",
