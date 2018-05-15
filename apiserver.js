@@ -134,7 +134,7 @@ app.get('/api/yelpreq', (req, res) => {
 
 
 app.get('/user', (req, res) => {
-    // console.log("User request received.")
+    console.log("User request received.")
     if (!req.user){
         res.send("Not logged in yet.");
     }
@@ -144,6 +144,7 @@ app.get('/user', (req, res) => {
             res.send("User not found");
         }
         else {
+            console.log(user);
             res.send({'user': user});
         }
     });  
