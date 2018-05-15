@@ -150,7 +150,7 @@ app.get('/user', (req, res) => {
 }});
 
 app.get('/addgoing', (req, res) => {
-
+    console.log("Add going request added");
     if (!req.user){
         res.send("Not logged in yet");
     }
@@ -164,6 +164,7 @@ app.get('/addgoing', (req, res) => {
 });
 
 app.get('/removegoing', (req, res) => {
+    console.log("Remove going request received");
     if (!req.user){
         res.send("Not logged in yet");
     }
