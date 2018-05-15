@@ -139,14 +139,10 @@ app.get('/user', (req, res) => {
         res.send("Not logged in yet.");
     }
     else {
-    LogOps.find(req.user.emails[0].value, process.env.DATABASE, function(user){
-        if (user == false){
-            res.send("User not found");
-        }
-        else {
+    LogOps.find(req.user.emails[0].value, process.env.DATABASE)
+    .then(user => {
             console.log(user);
             res.send({'user': user});
-        }
     });  
 }});
 

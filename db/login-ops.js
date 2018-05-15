@@ -49,7 +49,7 @@ login : function(user, url, cb){
     })
     cb(deferred.promise);
 },
-find: function(email, url, cb){
+find: function(email, url){
     const deferred = Q.defer();
     mongo.connect(url, (err, client) => {
         if (err) throw err;
@@ -73,7 +73,7 @@ find: function(email, url, cb){
             }
         });
     });
-    cb(deferred.promise);
+    return deferred.promise;
 },
 addGoing: function(user, restaurant, url, cb){
     const deferred = Q.defer();
